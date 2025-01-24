@@ -4,8 +4,17 @@ import PokemonCard from "@/component/PokemonCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
+type metadataPokemonTypes = {
+  results: resultsTypes[];
+}
+
+type resultsTypes = {
+  name: string;
+  url: string;
+}
+
 export default function Index() {
-  const [metadataPokemon, setMetadataPokemon] = useState({
+  const [metadataPokemon, setMetadataPokemon] = useState<metadataPokemonTypes>({
     results: []
   });
   useEffect(() => {
@@ -28,7 +37,8 @@ export default function Index() {
           data={metadataPokemon.results}
           renderItem={({item}) => <PokemonCard name={item.name} />}
           keyExtractor={item => item.name}
-      />
+        />
+        
       </View>
     </SafeAreaView>
   );

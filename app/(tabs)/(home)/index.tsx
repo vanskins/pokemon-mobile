@@ -1,15 +1,35 @@
-import { Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Text, View, FlatList } from "react-native";
+import PokemonCard from "@/component/PokemonCard";
+import { SafeAreaView } from "react-native-safe-area-context";
+import axios from "axios";
 
 export default function Index() {
+  const [metadataPokemon, setMetadataPokemon] = useState({
+    results: []
+  });
+  useEffect(() => {
+    axios.get('https://pokeapi.co/api/v2/pokemon').then(result => {
+      const { data } = result;
+      setMetadataPokemon(data);
+    }).then(error => console.log(error, 'Error'))
+  }, [])
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Hello world!sss</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center'
+        }}
+      >
+        
+        <FlatList
+          data={metadataPokemon.results}
+          renderItem={({item}) => <PokemonCard name={item.name} />}
+          keyExtractor={item => item.name}
+      />
+      </View>
+    </SafeAreaView>
   );
 }

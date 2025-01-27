@@ -6,6 +6,7 @@ import axios from "axios";
 
 type metadataPokemonTypes = {
   results: resultsTypes[];
+  next: string;
 }
 
 type resultsTypes = {
@@ -15,7 +16,8 @@ type resultsTypes = {
 
 export default function Index() {
   const [metadataPokemon, setMetadataPokemon] = useState<metadataPokemonTypes>({
-    results: []
+    results: [],
+    next: "",
   });
   useEffect(() => {
     axios.get('https://pokeapi.co/api/v2/pokemon').then(result => {
@@ -23,6 +25,16 @@ export default function Index() {
       setMetadataPokemon(data);
     }).then(error => console.log(error, 'Error'))
   }, [])
+
+  const handleAddingNewData = () => {
+    const { next } = metadataPokemon;
+    if (next) {
+      axios.get(next).then(result => {
+        const { data } = result;
+        setMetadataPokemon({...data, results: [...metadataPokemon.results, ...data.results]});
+      }).then(error => console.log(error, 'Error'))
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -37,6 +49,8 @@ export default function Index() {
           data={metadataPokemon.results}
           renderItem={({item}) => <PokemonCard name={item.name} />}
           keyExtractor={item => item.name}
+          onEndReached={handleAddingNewData}
+          onEndReachedThreshold={0.5}
         />
         
       </View>

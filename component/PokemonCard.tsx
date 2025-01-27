@@ -11,6 +11,15 @@ type PokemonTypes = {
   name: string;
   sprites: {
     front_default: string;
+  },
+  types: PokemonSpeciesType[]
+}
+
+type PokemonSpeciesType = {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
   }
 }
 
@@ -38,6 +47,9 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
       </View>
       <View style={{ flex: 1, paddingLeft: 10, paddingTop: 30 }}>
         <Text style={{ fontWeight: 500, fontSize: 18 }}>{name}</Text>
+        {
+          pokemon && pokemon.types && pokemon.types.map((item, k) => <Text key={k}>{item.type.name}</Text>)
+        }
       </View>
     </View>
   )

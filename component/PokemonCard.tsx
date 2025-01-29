@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import axios from "axios";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { POKEMON_TYPE } from "@/constants/pokemonTypes";
 
 type PokemonCardTypes = {
   name: string;
@@ -12,7 +15,9 @@ type PokemonTypes = {
   sprites: {
     front_default: string;
   },
-  types: PokemonSpeciesType[]
+  types: PokemonSpeciesType[],
+  weight: number;
+  base_experience: number;
 }
 
 type PokemonSpeciesType = {
@@ -45,11 +50,36 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
           }}
         />
       </View>
-      <View style={{ flex: 1, paddingLeft: 10, paddingTop: 30 }}>
-        <Text style={{ fontWeight: 500, fontSize: 18 }}>{name}</Text>
-        {
-          pokemon && pokemon.types && pokemon.types.map((item, k) => <Text key={k}>{item.type.name}</Text>)
-        }
+      <View style={{ flex: 1, padding: 10 }}>
+        <Text style={{ fontWeight: 600, fontSize: 20 }}>{name.toUpperCase()}</Text>
+        <View style={{ flexDirection: 'row', gap: 10 }}>
+          {
+            pokemon && pokemon.types && pokemon.types.map((item, k) => {
+              const type: string = item.type.name.toUpperCase()
+              return(
+                <View 
+                  key={k}
+                  style={{ 
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: POKEMON_TYPE[type],
+                    padding: 5,
+                    borderRadius: 5
+                  }}>
+                  <Text style={{ color: 'white', fontWeight: 600 }}>{item.type.name.toUpperCase()}</Text>
+                </View>
+              )
+            })
+          }
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 5, gap: 5 }}>
+          <MaterialCommunityIcons name="weight-pound" size={24} />
+          <Text style={{ fontWeight: 600, fontSize: 16}}>{pokemon?.weight} LB</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 5, gap: 5 }}>
+          <MaterialCommunityIcons name="pokeball" size={24} />
+          <Text style={{ fontWeight: 600, fontSize: 16}}>{pokemon?.base_experience} Exp</Text>
+        </View>
       </View>
     </View>
   )

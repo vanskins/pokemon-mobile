@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native";
 import axios from "axios";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 import { POKEMON_TYPE } from "@/constants/pokemonTypes";
 
@@ -32,6 +32,7 @@ const { width } = Dimensions.get('screen')
 
 export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardTypes) {
   const [pokemon, setPokemon] = useState<PokemonTypes>();
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   useEffect(() => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(result => {
       const { data } = result;
@@ -51,7 +52,15 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
         />
       </View>
       <View style={{ flex: 1, padding: 10 }}>
-        <Text style={{ fontWeight: 600, fontSize: 20 }}>{name.toUpperCase()}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <Text style={{ fontWeight: 600, fontSize: 20 }}>{name.toUpperCase()}</Text>
+          <TouchableOpacity
+            onPress={() => setIsFavorite(!isFavorite)}
+          >
+            <AntDesign name={isFavorite ? "heart": "hearto"} color={isFavorite ? "red": "black"} size={24} />
+          </TouchableOpacity>
+        </View>
+        
         <View style={{ flexDirection: 'row', gap: 10 }}>
           {
             pokemon && pokemon.types && pokemon.types.map((item, k) => {

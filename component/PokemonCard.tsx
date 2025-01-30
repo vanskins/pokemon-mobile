@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from "rea
 import axios from "axios";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
-import { POKEMON_TYPE } from "@/constants/pokemonTypes";
+import { POKEMON_TYPE } from "../constants/PokemonTypes";
 
 type PokemonCardTypes = {
   name: string;

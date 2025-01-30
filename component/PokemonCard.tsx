@@ -2,8 +2,9 @@ import { useState, useEffect } from "react"
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from "react-native";
 import axios from "axios";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import { LinearGradient } from 'expo-linear-gradient';
 
-import { POKEMON_TYPE } from "../constants/PokemonTypes";
+import { POKEMON_TYPE, POKEMON_GRADIENT } from "../constants/PokemonTypes";
 
 type PokemonCardTypes = {
   name: string;
@@ -41,16 +42,33 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
       console.log(error)
     })
   }, [])
+
+  const getPokemonGradientBackground = () => {
+    if (pokemon) {
+      if (pokemon.types && pokemon.types.length > 0) {
+        const gradientBackground = POKEMON_GRADIENT[pokemon.types[0].type.name.toUpperCase()]
+        if (gradientBackground) {
+          return gradientBackground;
+        }
+        return POKEMON_GRADIENT["NORMAL"];
+      }
+    }
+    return POKEMON_GRADIENT["NORMAL"];
+  }
+  
   return (
     <View style={styles.card}>
-      <View style={{ borderTopLeftRadius: 10, borderBottomLeftRadius: 10, justifyContent: 'center', backgroundColor: '#dfe6e9', padding: 20 }}>
+      <LinearGradient
+        colors={getPokemonGradientBackground()}
+        style={{ borderTopLeftRadius: 10, borderBottomLeftRadius: 10, justifyContent: 'center', backgroundColor: '#dfe6e9', padding: 20 }}
+      >
         <Image
           style={styles.img}
           source={{
             uri: pokemon ? pokemon.sprites.front_default : "https://assets.pokemon.com/assets/cms2/img/pokedex/full//007.png",
           }}
         />
-      </View>
+      </LinearGradient>
       <View style={{ flex: 1, padding: 10, gap: 5 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <Text style={{ fontWeight: 500, fontSize: 19 }}>{name.toUpperCase()}</Text>

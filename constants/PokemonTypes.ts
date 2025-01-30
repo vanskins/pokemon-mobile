@@ -14,3 +14,12 @@ export const POKEMON_TYPE: any = {
   ROCK: '#B8A038',     // Dark yellow for stones and mountains
   STEEL: '#B8B8D0'     // Metallic silver-gray for steel Pokémon
 };
+
+export const POKEMON_GRADIENT: any = {
+  WATER: ['#0077BE', '#00AFFF', '#66CCFF'],  // Deep blue to cyan
+  NORMAL: ['#A8A878', '#C6C6A7', '#E0E0D0'], // Neutral gray to soft beige
+  GRASS: ['#4CAF50', '#78C850', '#B2FF59'],  // Leafy green to lime
+  POISON: ['#A040A0', '#C85FC8', '#E678E7'], // Toxic purple to magenta
+  FIRE: ['#FF4500', '#FF8C00', '#FFD700'],   // Fiery red-orange
+  ELECTRIC: ['#FFD700', '#FFEA00', '#FFAA00'] // Electric yellow
+}

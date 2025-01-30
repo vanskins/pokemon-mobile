@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
     height: 150,
     width: width - 50,
     flexDirection: 'row',
-    
     backgroundColor: 'white',
     borderRadius: 10,
-    margin: 5
+    alignSelf: 'center',
+    margin: 15,
   },
   img: {
     height: 110,

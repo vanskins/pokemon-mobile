@@ -41,18 +41,31 @@ export default function Index() {
       <View
         style={{
           flex: 1,
-          alignItems: 'center'
         }}
       >
-        
-        <FlatList
-          data={metadataPokemon.results}
-          renderItem={({item}) => <PokemonCard name={item.name} />}
-          keyExtractor={item => item.name}
-          onEndReached={handleAddingNewData}
-          onEndReachedThreshold={0.5}
-        />
-        
+        <View>
+          <FlatList
+            data={metadataPokemon.results}
+            renderItem={({item}) => <PokemonCard name={item.name} />}
+            keyExtractor={item => item.name}
+            onEndReached={handleAddingNewData}
+            onEndReachedThreshold={0.5}
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={
+              <View 
+                style={{
+                  backgroundColor: 'white',
+                  padding: 20,
+                  elevation: 6
+                }}>
+                <Text style={{ fontWeight: 900, fontSize: 40 }}>POKEMON</Text>
+                <Text style={{ fontSize: 18 }}>Welcome to Pokemon app, where you can find all kinds of pokemon.</Text>
+              </View>
+            }
+            stickyHeaderHiddenOnScroll={true}
+            stickyHeaderIndices={[0]}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );

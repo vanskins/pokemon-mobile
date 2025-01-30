@@ -25,6 +25,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <MaterialCommunityIcons size={28} name="format-list-bulleted-type" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Me',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons size={28} name="face-man-profile" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }

@@ -51,9 +51,9 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
           }}
         />
       </View>
-      <View style={{ flex: 1, padding: 10 }}>
+      <View style={{ flex: 1, padding: 10, gap: 5 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-          <Text style={{ fontWeight: 600, fontSize: 20 }}>{name.toUpperCase()}</Text>
+          <Text style={{ fontWeight: 500, fontSize: 19 }}>{name.toUpperCase()}</Text>
           <TouchableOpacity
             onPress={() => setIsFavorite(!isFavorite)}
           >
@@ -61,7 +61,7 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
           </TouchableOpacity>
         </View>
         
-        <View style={{ flexDirection: 'row', gap: 10 }}>
+        <View style={{ flexDirection: 'row', gap: 4 }}>
           {
             pokemon && pokemon.types && pokemon.types.map((item, k) => {
               const type: string = item.type.name.toUpperCase()
@@ -72,22 +72,23 @@ export default function PokemonCard({ name = "Random Pokemon" }: PokemonCardType
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: POKEMON_TYPE[type],
-                    padding: 5,
+                    paddingVertical: 2,
+                    paddingHorizontal: 10,
                     borderRadius: 5
                   }}>
-                  <Text style={{ color: 'white', fontWeight: 600 }}>{item.type.name.toUpperCase()}</Text>
+                  <Text style={{ color: 'white', fontWeight: 600, fontSize: 11 }}>{item.type.name.toUpperCase()}</Text>
                 </View>
               )
             })
           }
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 5, gap: 5 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 5 }}>
           <MaterialCommunityIcons name="weight-pound" size={24} />
-          <Text style={{ fontWeight: 600, fontSize: 16}}>{pokemon?.weight} LB</Text>
+          <Text style={{ fontSize: 14 }}>{pokemon?.weight} LB</Text>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginTop: 5, gap: 5 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 5 }}>
           <MaterialCommunityIcons name="pokeball" size={24} />
-          <Text style={{ fontWeight: 600, fontSize: 16}}>{pokemon?.base_experience} Exp</Text>
+          <Text style={{ fontSize: 14 }}>{pokemon?.base_experience} Exp</Text>
         </View>
       </View>
     </View>
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     margin: 5
   },
   img: {
-    height: 100,
-    width: 100
+    height: 110,
+    width: 110
   }
 })

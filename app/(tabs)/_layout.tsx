@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import MaterialIcon from '@expo/vector-icons/MaterialIcons'
+import { MaterialIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default function TabLayout() {
   return (
@@ -16,7 +15,14 @@ export default function TabLayout() {
         name="favourites"
         options={{
           title: 'Favourites',
-          tabBarIcon: ({ color }) => <MaterialIcon size={28} name="favorite" color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons size={28} name="favorite" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="items"
+        options={{
+          title: 'Items',
+          tabBarIcon: ({ color }) => <MaterialCommunityIcons size={28} name="format-list-bulleted-type" color={color} />,
         }}
       />
     </Tabs>

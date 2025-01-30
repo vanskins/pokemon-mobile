@@ -28,12 +28,12 @@ export default function Index() {
 
   const handleAddingNewData = () => {
     const { next } = metadataPokemon;
-    if (next) {
-      axios.get(next).then(result => {
-        const { data } = result;
-        setMetadataPokemon({...data, results: [...metadataPokemon.results, ...data.results]});
-      }).then(error => console.log(error, 'Error'))
-    }
+    // if (next) {
+    //   axios.get(next).then(result => {
+    //     const { data } = result;
+    //     setMetadataPokemon({...data, results: [...metadataPokemon.results, ...data.results]});
+    //   }).then(error => console.log(error, 'Error'))
+    // }
   }
 
   return (
